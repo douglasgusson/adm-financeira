@@ -1,4 +1,3 @@
-#!/usr/bin/ruby
 
 class App
 
@@ -17,6 +16,7 @@ class App
         puts "| 1. Calcular juros compostos               |"           
         puts "| 2. Calcular valor presente líquido (VPL)  |"
         puts "| 3. Calcular taxa interna de retorno (TIR) |"
+        puts "| 0. SAIR                                   |"
         puts "---------------------------------------------"
         print "Informe a opção desejada: "
 
@@ -27,6 +27,9 @@ class App
                 valor_presente_liquido
             when "3"
                 taxa_interna_retorno
+            when "0"
+                print "\nObrigado por utilizar este software!\n\n"
+                exit
             else
               puts "\nDesculpe, opção inválida!"
               menu
