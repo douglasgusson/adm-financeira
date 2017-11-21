@@ -3,7 +3,6 @@ class App
 
 
     def initialize
-        puts "\n- OBS.: Para valores DECIMAIS utilize ponto invés de vírgula."
         menu
     end
 
@@ -17,6 +16,9 @@ class App
         puts "| 2. Calcular valor presente líquido (VPL)  |"
         puts "| 3. Calcular taxa interna de retorno (TIR) |"
         puts "| 0. SAIR                                   |"
+        puts "---------------------------------------------"
+        puts "| OBS.: Para valores DECIMAIS utilize ponto |"
+        puts "|       invés de vírgula                    |"
         puts "---------------------------------------------"
         print "Informe a opção desejada: "
 
@@ -52,7 +54,7 @@ class App
 
         m = (capital*(1+(i/100))**t).round(2)
 
-        puts "\nAo final de #{t} períodos com taxa de #{i}\% o valor será #{m}."
+        puts "\nAO FIM DE #{t} PERÍODOS COM TAXA DE #{i}\% O VALOR SERÁ R$ #{vpl}."
 
         menu
 
@@ -66,18 +68,18 @@ class App
         vpls = []
 
         puts
-        puts "Informe o valor do fluxo inicial: "   
+        puts "Informe o valor do investimento inicial: "   
         fluxos << gets.to_f * (-1)
         
-        puts "Informe o total de períodos: "    
+        puts "Informe o número total de períodos: "    
         t = gets.to_i
         
-        puts "Informe o valor da taxa (%): "    
+        puts "Informe o valor da taxa (%, Ex.: 10):"    
         i = gets.to_f
 
         for x in 1..t
             
-            puts "Informe o valor do fluxo para o período #{x}: "   
+            puts "Informe o valor do fluxo de caixa (FC) para o período #{x}: "   
             fluxos << gets.to_f     
 
             vpls << (fluxos[x]/(1+(i/100))**x).round(2)
@@ -86,8 +88,7 @@ class App
 
         vpl = (vpls.inject(0, :+) + fluxos.first).round(2) 
 
-        puts "#{vpls}"
-        puts "\nAo final de #{t} períodos com taxa de #{i}\% o valor será #{vpl}."
+        puts "\nAO FIM DE #{t} PERÍODOS COM TAXA DE #{i}\% O VALOR SERÁ R$ #{vpl}."
 
         menu
 
@@ -99,14 +100,14 @@ class App
         tir = 0
         
         puts
-        puts "Informe o valor do fluxo inicial: "   
+        puts "Informe o valor do investimento inicial: "   
         fluxos << gets.to_f * (-1)    
 
-        puts "Informe o total de períodos: "    
+        puts "Informe o número total de períodos: "    
         t = gets.to_i  
 
         for i in 1..t            
-            puts "Informe o valor do fluxo para o período #{i}: "   
+            puts "Informe o valor do fluxo de caixa (FC) para o período #{i}: "   
             fluxos << gets.to_f     
         end
 
@@ -119,7 +120,9 @@ class App
             break if not aux > 0
         end  
 
-        puts "\nTIR = #{tir.round(2)}\%"
+        puts "A TAXA INTERNA DE RETORNO (TIR) É IGUAL A #{tir.round(2)}\%"
+
+        menu
 
     end
 
