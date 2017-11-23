@@ -101,7 +101,7 @@ class App
         
         puts
         puts "Informe o valor do investimento inicial: "   
-        fluxos << gets.to_f * (-1)    
+        fluxos << gets.to_f * (-1) # inverte o sinal do valor investido   
 
         puts "Informe o número total de períodos: "    
         t = gets.to_i  
@@ -112,11 +112,21 @@ class App
         end
 
         loop do
-            aux = 0
-            tir += 0.01  
-            for i in 0..fluxos.size-1
-                aux += (fluxos[i]/(1+(tir/100))**(i)).round(2)
+
+            aux = 0 # variável auxiliar para o cálculo
+            tir += 0.01 # incrementa o valor da TIR para a próxima tentativa 
+
+            # aux é o somatório dos resultados do cálculo de valor presente para cada fluxo de caixa (no for)
+            # a cada interação do do..while a variável aux é zerada e o valor da tir é incrementado (+0.01)
+            # a condição de parada do do..while é quando aux chega a um resultado menor ou igual a zero.
+            # quando o valor de aux é menor ou igual a zero quer dizer que atingimos o valor de 
+            # taxa (TIR) necessária para igualar o valor de um investimento.    
+            # Fórmula: (fluxos[i]/(1+(tir/100))**(i)) 
+
+            for i in 0..fluxos.size-1                     
+                aux += (fluxos[i]/(1+(tir/100))**(i)).round(2)               
             end
+
             break if not aux > 0
         end  
 
