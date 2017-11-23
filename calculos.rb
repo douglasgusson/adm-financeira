@@ -210,11 +210,11 @@ class App
             acumulados[x] = vpls[x] - acumulados[x-1] * (-1)
         end
 
+        positivo = -1
+
         for x in 0..t
             if acumulados[x] > 0
                 positivo = x
-            else
-                positivo = -1
             end
         end
 
