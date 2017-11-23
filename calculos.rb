@@ -135,6 +135,56 @@ class App
         menu
 
     end
+    
+    # função para calculo de payback
+    def payback
+
+        fluxos = []
+        vpls = []
+        acumulados = []
+
+        puts
+        puts "Informe o valor do investimento inicial: "   
+        fluxos << gets.to_f * (-1) # inverte o sinal do valor investido
+        
+        puts "Informe o número total de períodos: "    
+        t = gets.to_i
+        
+        puts "Informe o valor da taxa (%, Ex.: 10):"    
+        i = gets.to_f
+
+        vpls << (fluxos[0]/(1+(i/100))**0).round(2)
+        acumulados << vpls[0]
+        
+        for x in 1..t            
+            puts "Informe o valor do fluxo de caixa (FC) para o período #{x}: "   
+            fluxos << gets.to_f     
+
+            vpls << (fluxos[x]/(1+(i/100))**x).round(2)
+        end
+
+        for x in 1..t
+            acumulados[x] = vpls[x] - acumulados[x-1] * (-1)
+        end
+
+        for x in 0..t
+            if acumulados[x] > 0
+                positivo = x
+            else
+                positivo = -1
+            end
+        end
+
+        if positivo != -1
+           pbk = ((positivo-1) + (acumulados[positivo-1]*(-1)/vpls[positivo])).round(2)
+           puts "\nO PAYBACK SERÁ DE #{pbk} PERÍODOS."  
+        else
+           puts "\nNÃO HOUVE PAYBACK MENOR QUE #{t} PERÍODOS." 
+        end     
+
+        menu
+
+    end
 
 end
 
