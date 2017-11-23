@@ -11,10 +11,14 @@ class App
     def menu
 
         puts
-        puts " _----------------- MENU ------------------_"
-        puts "| 1. Calcular juros compostos               |"           
-        puts "| 2. Calcular valor presente líquido (VPL)  |"
-        puts "| 3. Calcular taxa interna de retorno (TIR) |"
+        puts "---------------------------------------------"
+        puts "|                   MENU                    |"
+        puts "---------------------------------------------"
+        puts "| 1. Calcular valor futuro (VF)             |"
+        puts "| 2. Calcular valor presente (VP)           |"
+        puts "| 3. Calcular valor presente líquido (VPL)  |"
+        puts "| 4. Calcular Payback                       |"
+        puts "| 5. Calcular taxa interna de retorno (TIR) |"
         puts "| 0. SAIR                                   |"
         puts "---------------------------------------------"
         puts "| OBS.: Para valores DECIMAIS utilize ponto |"
@@ -24,10 +28,14 @@ class App
 
         case gets.strip
             when "1"
-                juros_composto
+                valor_futuro
             when "2"
-                valor_presente_liquido
+                valor_presente
             when "3"
+                valor_presente_liquido
+            when "4"
+                payback
+            when "5"
                 taxa_interna_retorno
             when "0"
                 print "\nObrigado por utilizar este software!\n\n"
@@ -39,12 +47,15 @@ class App
     end
 
 
-    # função para calculo de montante utilizando juros compostos
-    def juros_composto
 
-        puts
-        puts "Informe o valor do capital: " 
-        capital = gets.to_f
+    # função para calculo de valor futuro (VF) utilizando juros compostos
+    def valor_futuro
+
+        puts "---------------------------------------------"
+        puts "|            VALOR FUTURO (VF)              |"
+        puts "---------------------------------------------"
+        puts "Informe o valor presente: " 
+        vp = gets.to_f
         
         puts "Informe o total de períodos: "    
         t = gets.to_i
@@ -52,9 +63,33 @@ class App
         puts "Informe o valor da taxa (%): "    
         i = gets.to_f
 
-        m = (capital*(1+(i/100))**t).round(2)
+        m = (vp*(1+(i/100))**t).round(2)
 
-        puts "\nAO FIM DE #{t} PERÍODOS COM TAXA DE #{i}\% O VALOR SERÁ R$ #{vpl}."
+        puts "\nAO FIM DE #{t} PERÍODOS COM TAXA DE #{i}\% O VALOR SERÁ R$ #{m}."
+
+        menu
+
+    end
+
+
+    # função para calculo de valor presente (VP) utilizando juros compostos
+    def valor_presente
+
+        puts "---------------------------------------------"
+        puts "|           VALOR PRESENTE (VP)             |"
+        puts "---------------------------------------------"
+        puts "Informe o valor futuro: " 
+        vp = gets.to_f
+        
+        puts "Informe o total de períodos: "    
+        t = gets.to_i
+        
+        puts "Informe o valor da taxa (%): "    
+        i = gets.to_f
+
+        m = (vp/(1+(i/100))**t).round(2)
+
+        puts "\nAO FIM DE #{t} PERÍODOS COM TAXA DE #{i}\% O VALOR SERÁ R$ #{m}."
 
         menu
 
@@ -67,7 +102,9 @@ class App
         fluxos = []
         vpls = []
 
-        puts
+        puts "---------------------------------------------"
+        puts "|      VALOR PRESENTE LÍQUIDO (VPL)         |"
+        puts "---------------------------------------------"
         puts "Informe o valor do investimento inicial: "   
         fluxos << gets.to_f * (-1)
         
@@ -94,12 +131,15 @@ class App
 
     end
 
+
     def taxa_interna_retorno
 
         fluxos = []
         tir = 0
         
-        puts
+        puts "---------------------------------------------"
+        puts "|      TAXA INTERNA DE RETORNO (TIR)        |"
+        puts "---------------------------------------------"
         puts "Informe o valor do investimento inicial: "   
         fluxos << gets.to_f * (-1) # inverte o sinal do valor investido   
 
@@ -136,6 +176,7 @@ class App
 
     end
     
+
     # função para calculo de payback
     def payback
 
@@ -143,7 +184,9 @@ class App
         vpls = []
         acumulados = []
 
-        puts
+        puts "---------------------------------------------"
+        puts "|                 PAYBACK                   |"
+        puts "---------------------------------------------"
         puts "Informe o valor do investimento inicial: "   
         fluxos << gets.to_f * (-1) # inverte o sinal do valor investido
         
