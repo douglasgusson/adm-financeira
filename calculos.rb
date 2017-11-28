@@ -251,7 +251,7 @@ class App
         puts "Informe o custo variável unitário (CV): "    
         custo_variavel = gets.to_f
         
-        pe = (custo_fixo / (preco_venda - custo_variavel)).floor + 1
+        pe = (custo_fixo / (preco_venda - custo_variavel)).ceil
 
         puts "\nPE = #{pe}"
 
