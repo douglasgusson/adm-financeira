@@ -19,6 +19,7 @@ class App
         puts "| 3. Calcular valor presente líquido (VPL)  |"
         puts "| 4. Calcular Payback                       |"
         puts "| 5. Calcular taxa interna de retorno (TIR) |"
+        puts "| 6. Calcular ponto de equilíbrio (PE)      |"
         puts "| 0. SAIR                                   |"
         puts "---------------------------------------------"
         puts "| OBS.: Para valores DECIMAIS utilize ponto |"
@@ -37,6 +38,8 @@ class App
                 payback
             when "5"
                 taxa_interna_retorno
+            when "6"
+                ponto_equilibrio
             when "0"
                 print "\nObrigado por utilizar este software!\n\n"
                 exit
@@ -224,6 +227,41 @@ class App
         else
            puts "\nNÃO HOUVE PAYBACK MENOR QUE #{t} PERÍODOS." 
         end     
+
+        menu
+
+    end
+
+
+    # função para calculo de ponto de equilíbrio (PE)
+    def ponto_equilibrio
+
+        puts "---------------------------------------------"
+        puts "|        PONTO DE EQUILÍBRIO (PE)           |"
+        puts "---------------------------------------------"
+        puts "Informe a projeção de vendas (PJ): "
+        projecao_vendas = gets.to_i
+
+        puts "Informe o valor do custo fixo (CF): "   
+        custo_fixo = gets.to_f
+
+        puts "Informe o preço de venda unitário (PV): "    
+        preco_venda = gets.to_f
+
+        puts "Informe o custo variável unitário (CV): "    
+        custo_variavel = gets.to_f
+        
+        pe = (custo_fixo / (preco_venda - custo_variavel)).floor + 1
+
+        puts "\nPE = #{pe}"
+
+        if projecao_vendas > pe
+            puts "\nTendo vendido #{projecao_vendas}, está acima do ponto de equilíbrio (positivo)." 
+        elsif projecao_vendas == pe 
+            puts "\nTendo vendido #{projecao_vendas}, está igual do ponto de equilíbrio." 
+        else
+            puts "\nTendo vendido #{projecao_vendas}, está abaixo do ponto de equilíbrio (nagativo)."                                                                                                 
+        end
 
         menu
 
