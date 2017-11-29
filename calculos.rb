@@ -66,7 +66,7 @@ class App
         puts "Informe o valor da taxa (%): "    
         i = gets.to_f
 
-        m = (vp*(1+(i/100))**t).round(2)
+        m = (vp/(1+(i/100))**t).round(2)
 
         puts "\nAO FIM DE #{t} PERÍODOS COM TAXA DE #{i}\% O VALOR SERÁ R$ #{m}."
 
@@ -90,7 +90,7 @@ class App
         puts "Informe o valor da taxa (%): "    
         i = gets.to_f
 
-        m = (vp/(1+(i/100))**t).round(2)
+        m = (vp*(1+(i/100))**t).round(2)
 
         puts "\nAO FIM DE #{t} PERÍODOS COM TAXA DE #{i}\% O VALOR SERÁ R$ #{m}."
 
